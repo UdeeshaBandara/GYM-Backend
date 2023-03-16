@@ -6,9 +6,9 @@ module.exports = {
     "jwt_secret": "gym-backend",
     "jwt_expiration_in_seconds": 36000,
     "environment": "dev",
-    "HOST": "localhost:3306",
+    "HOST": "127.0.0.1",
     "USER": "root",
-    "PASSWORD": "",
+    "PASSWORD": '',
     "DB": "gym",
     "dialect": "mysql",
 

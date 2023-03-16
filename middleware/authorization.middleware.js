@@ -52,19 +52,11 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
 
         if (!result[0]) {
             res.status(200).send({status: false, data: 'Invalid account'});
-        } else if (!req.body.fcm) {
-            res.status(200).send({status: false, data: 'Failed to login'});
         } else {
             let passwordFields = result[0].password.split('$');
             let salt = passwordFields[0];
             let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
             if (hash === passwordFields[1]) {
-                req.body = {
-                    userId: result[0].id,
-                    email: result[0].email,
-                    fcm: req.body.fcm,
-                    name: result[0].firstName + ' ' + result[0].lastName,
-                };
                 return next();
             } else {
                 return res.status(200).send({status: false, data: 'Invalid password'});
@@ -102,35 +94,32 @@ exports.checkEmailExist = (req, res, next) => {
 
 };
 
-exports.login = (req, res) => {
-    try {
-        let refreshId = req.body.userId + jwtSecret;
-        let salt = crypto.randomBytes(16).toString('base64');
-        let hash = crypto.createHmac('sha512', salt).update(refreshId).digest("base64");
-        req.body.refreshKey = salt;
-        let token = jwt.sign(req.body, jwtSecret);
-        let b = Buffer.from(hash);
-        let refresh_token = b.toString('base64');
+exports.checkEmailPhoneNumber = (req, res, next) => {
 
-
-        user.update({fcm: req.body.fcm}, {
-            where: {
-                email: req.body.email
-            }
-        }).then((result) => {
-            console.log(result);
-
-            res.status(200).send({status: true, accessToken: token, refreshToken: refresh_token});
-
-        }).catch(err => {
-            err.errors.map(e =>
-                res.status(200).send({
-                    status: false,
-                    message: e.message
-                }));
-        });
-
-    } catch (err) {
-        res.status(200).send({status: false, errors: err});
+    if (!req.body.name) {
+        return res.status(200).send({status: false, data: 'Invalid parameter for name'});
     }
+    if (!req.body.telephone) {
+        return res.status(200).send({status: false, data: 'Invalid telephone number'});
+    }
+
+    user.findAll({
+        where: {
+            [Op.or]: [
+                {email: req.body.email},
+                {telephone: req.body.telephone}
+            ]
+        }
+    }).then((result) => {
+
+        if (result.length >= 1) {
+            res.status(200).send({status: false, data: 'E-mail or telephone already exist'});
+        } else {
+
+            return next();
+
+        }
+
+    });
+
 };

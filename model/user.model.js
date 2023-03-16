@@ -1,16 +1,15 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
 
-    const user = sequelize.define("user", {
+    const user = sequelize.define("users", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: ""
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: ""
-
         },
         email: {
             type: DataTypes.STRING,
@@ -22,7 +21,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         },
         telephone: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 0,
             unique: true
 
@@ -33,6 +31,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             defaultValue: ""
 
         },
+        //status 1 for active user
+        //status 2 for disabled user
         status: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -40,20 +40,17 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
 
         },
         age: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: ""
+            type: DataTypes.INTEGER,
+            defaultValue: 0
 
         },
         gender: {
             type: DataTypes.STRING,
-            allowNull: false,
             defaultValue: ""
 
         },
         weight: {
             type: DataTypes.STRING,
-            allowNull: false,
             defaultValue: ""
 
         },
