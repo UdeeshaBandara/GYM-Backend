@@ -6,9 +6,9 @@ module.exports = {
     "jwt_secret": "gym-backend",
     "jwt_expiration_in_seconds": 36000,
     "environment": "dev",
-    "HOST": "127.0.0.1",
-    "USER": "root",
-    "PASSWORD": '',
+    "HOST": "ensol.mysql.database.azure.com",
+    "USER": "udeesha",
+    "PASSWORD": "Helloworld!",
     "DB": "gym",
     "dialect": "mysql",
 
