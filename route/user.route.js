@@ -19,6 +19,11 @@ exports.routesConfig = function (app) {
         AuthMiddleware.isPasswordAndUserMatch,
         AuthController.login
     ]);
+    app.post('/user/wizard', [
+        AuthMiddleware.validJWTNeeded,
+        AuthMiddleware.validateWizardFields,
+        AuthController.updateUserProfile
+    ]);
 
 
 };

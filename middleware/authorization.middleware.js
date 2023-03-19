@@ -37,6 +37,22 @@ exports.hasAuthValidFields = (req, res, next) => {
     }
 };
 
+exports.validateWizardFields = (req, res, next) => {
+
+    if (req.body) {
+        if (!req.body.gender) {
+            return res.status(200).send({status: false, data: "Gender is required"});
+        } else if (!req.body.weight) {
+            return res.status(200).send({status: false, data: "Weight is required"});
+        } else if (!req.body.age) {
+            return res.status(200).send({status: false, data: "Age is required"});
+        } else {
+            return next();
+        }
+    } else {
+        return res.status(200).send({status: false, data: 'Missing email and password fields'});
+    }
+};
 
 exports.isPasswordAndUserMatch = (req, res, next) => {
 

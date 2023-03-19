@@ -22,9 +22,34 @@ exports.login = (req, res) => {
         let refresh_token = b.toString('base64');
 
         res.status(200).send({status: true, accessToken: token, refreshToken: refresh_token});
-        
+
 
     } catch (err) {
         res.status(200).send({status: false, errors: err});
+    }
+};
+exports.updateUserProfile = (req, res) => {
+    if (req.body) {
+
+        user.update(req.body, {
+            where: {
+                email: req.jwt.email
+            }
+        }).then((result) => {
+
+
+            res.status(200).send({
+                status: true,
+                data: "User profile updated successfully",
+            });
+
+        }).catch(err => {
+
+            res.status(200).send({status: false, data: "Failed to update user"});
+
+
+        });
+
+
     }
 };
