@@ -24,6 +24,10 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validateWizardFields,
         AuthController.updateUserProfile
     ]);
+    app.get('/user', [
+        AuthMiddleware.validJWTNeeded,
+        AuthController.getUserInfo
+    ]);
 
 
 };

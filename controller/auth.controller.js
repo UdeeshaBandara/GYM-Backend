@@ -52,3 +52,32 @@ exports.updateUserProfile = (req, res) => {
 
     }
 };
+
+exports.getUserInfo = (req, res) => {
+    if (req.body) {
+
+        user.findAll(req.body, {
+            where: {
+                email: req.jwt.email
+            }
+        }).then((result) => {
+
+            if (!result[0]) {
+                res.status(200).send({status: false, data: 'Invalid user'});
+            } else {
+                const {['password']: password, ...userWithoutPassword} = result[0].dataValues
+                res.status(200).send({
+                    status: true,
+                    data: userWithoutPassword
+                });
+            }
+        }).catch(err => {
+
+            res.status(200).send({status: false, data: "Failed to update user"});
+
+
+        });
+
+
+    }
+};
