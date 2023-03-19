@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken'), secret = require('../config/env.config.js').jwt_secret
+const jwt = require('jsonwebtoken');
 const crypto = require("crypto");
 const user = require("../model/model.index").user;
 const {Op} = require("sequelize");
@@ -10,7 +10,7 @@ exports.validJWTNeeded = (req, res, next) => {
             if (authorization[0] !== 'Bearer') {
                 return res.status(401).send({status: false, data: "Unauthorized"});
             } else {
-                req.jwt = jwt.verify(authorization[1], secret);
+                req.jwt = jwt.verify(authorization[1], process.env.JWT_SECRET);
                 return next();
             }
 

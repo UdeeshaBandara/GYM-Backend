@@ -1,5 +1,5 @@
 const express = require('express');
-const config = require('./config/env.config.js');
+require('dotenv').config();
 const UserRouter = require('./route/user.route');
 
 const app = express();
@@ -21,6 +21,5 @@ app.use(function (req, res, next) {
 
 UserRouter.routesConfig(app);
 
-app.listen(config.port, function () {
-    console.log('app listening at port %s', config.port);
+app.listen(process.env.PORT || 3600, function () {
 });
