@@ -15,6 +15,7 @@ db.sequelize = sequelize;
 
 
 db.user = require("./user.model.js")(sequelize, Sequelize,DataTypes);
+db.exercise = require("./exercise.model.js")(sequelize, Sequelize,DataTypes);
 
 //Table relationships
 

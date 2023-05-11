@@ -54,6 +54,16 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             defaultValue: ""
 
         },
+        height: {
+            type: DataTypes.STRING,
+            defaultValue: ""
+
+        },
+        bmi: {
+            type: DataTypes.STRING,
+            defaultValue: ""
+
+        },
 
         //1 for admin
         //0 for normal user

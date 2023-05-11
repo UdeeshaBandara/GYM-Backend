@@ -46,11 +46,15 @@ exports.validateWizardFields = (req, res, next) => {
             return res.status(200).send({status: false, data: "Weight is required"});
         } else if (!req.body.age) {
             return res.status(200).send({status: false, data: "Age is required"});
+        } else if (!req.body.height) {
+            return res.status(200).send({status: false, data: "Height is required"});
+        }  else if (!req.body.bmi) {
+            return res.status(200).send({status: false, data: "The BMI value is required"});
         } else {
             return next();
         }
     } else {
-        return res.status(200).send({status: false, data: 'Missing email and password fields'});
+        return res.status(200).send({status: false, data: 'Missing required fields'});
     }
 };
 
