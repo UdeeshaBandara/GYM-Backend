@@ -8,7 +8,7 @@ exports.routesConfig = function (app) {
     app.get('/exercise/home', [
         AuthMiddleware.validJWTNeeded,
 
-        ExerciseController.getHomeFeed
+        ExerciseController.getExerciseByCategory
     ]);
     app.post('/exercise', [
         AuthMiddleware.validJWTNeeded,

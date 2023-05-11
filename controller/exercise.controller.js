@@ -1,14 +1,12 @@
-const {exercise} = require("../model/model.index");
+const {exercise, user, category, exerciseCategory} = require("../model/model.index");
 
 exports.getHomeFeed = async (req, res) => {
 
-    let exerciseList = await exercise.findAll();
+    let exerciseList = await category.findAll();
 
     res.status(200).send({status: true, data: exerciseList});
 };
 exports.create = async (req, res) => {
-
-
 
     exercise.create({
         name: req.body.name,
@@ -24,5 +22,23 @@ exports.create = async (req, res) => {
 
 
     });
+
+};
+exports.getExerciseByCategory = async (req, res) => {
+
+
+    const exerciseCategories = await category.findAll({
+        include: {
+            model: exercise
+        },
+
+    }).catch(err => {
+        return res.status(200).send({status: false, data: "Failed to retrieve exercises"});
+
+
+    });
+
+    return res.status(201).send({status: true, data: exerciseCategories});
+
 
 };
