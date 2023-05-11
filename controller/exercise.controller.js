@@ -1,8 +1,8 @@
 const {exercise, user, category, exerciseCategory} = require("../model/model.index");
 
-exports.getHomeFeed = async (req, res) => {
+exports.getAllExercises = async (req, res) => {
 
-    let exerciseList = await category.findAll();
+    let exerciseList = await exercise.findAll();
 
     res.status(200).send({status: true, data: exerciseList});
 };
