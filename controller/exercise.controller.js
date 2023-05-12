@@ -4,6 +4,10 @@ exports.getAllExercises = async (req, res) => {
 
     let exerciseList = await exercise.findAll();
 
+    exerciseList = exerciseList.map(el => ({
+        ...el.dataValues,
+        isChecked: false
+    }));
     res.status(200).send({status: true, data: exerciseList});
 };
 exports.create = async (req, res) => {
