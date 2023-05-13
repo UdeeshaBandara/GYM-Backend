@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const UserRouter = require('./routes/user.route');
 const ExerciseRouter = require('./routes/exercise.route');
+const CustomScheduleRouter = require('./routes/custom.schedule.route');
 
 const admin = require("firebase-admin");
 // const serverKey = require('./private_key.json');
@@ -30,6 +31,7 @@ app.use(function (req, res, next) {
 
 UserRouter.routesConfig(app);
 ExerciseRouter.routesConfig(app);
+CustomScheduleRouter.routesConfig(app);
 
 app.listen(process.env.PORT || 3600, function () {
 });

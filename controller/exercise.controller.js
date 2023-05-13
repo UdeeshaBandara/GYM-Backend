@@ -6,7 +6,9 @@ exports.getAllExercises = async (req, res) => {
 
     exerciseList = exerciseList.map(el => ({
         ...el.dataValues,
-        isChecked: false
+        isChecked: false,
+        repCount: 0,
+        setCount: 0,
     }));
     res.status(200).send({status: true, data: exerciseList});
 };
@@ -37,6 +39,7 @@ exports.getExerciseByCategory = async (req, res) => {
         },
 
     }).catch(err => {
+
         return res.status(200).send({status: false, data: "Failed to retrieve exercises"});
 
 

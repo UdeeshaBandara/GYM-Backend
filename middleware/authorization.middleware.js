@@ -77,6 +77,11 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
             let salt = passwordFields[0];
             let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
             if (hash === passwordFields[1]) {
+                req.body = {
+                    userId: result[0].id,
+                    email: result[0].email,
+                    name: result[0].name,
+                };
                 return next();
             } else {
                 return res.status(200).send({status: false, data: 'Invalid password'});
