@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const user = require("../model/model.index").user;
+const {exercise,user,personalGoals } = require("../model/model.index");
 
 exports.insert = (req, res) => {
 
@@ -23,4 +23,10 @@ exports.insert = (req, res) => {
 
     });
 
+};
+exports.getPersonalGoals = async (req, res) => {
+
+    let personalGoalsList = await personalGoals.findAll();
+
+    res.status(200).send({status: true, data: personalGoalsList});
 };

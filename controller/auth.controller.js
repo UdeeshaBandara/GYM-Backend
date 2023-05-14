@@ -30,6 +30,9 @@ exports.login = (req, res) => {
 exports.updateUserProfile = (req, res) => {
     if (req.body) {
 
+
+        req.body.personalGoalsId = req.body.goalId;
+        delete req.body.goalId;
         user.update(req.body, {
             where: {
                 email: req.jwt.email

@@ -17,12 +17,15 @@ exports.getAllCustomExercises = async (req, res) => {
     return res.status(201).send({status: true, data: customExercises});
 
 };
-exports.create = async (req, res) => {
-
+exports.insert = async (req, res) => {
+    console.log('req.body', req.body)
     customSchedules.create({
         name: req.body.name,
         userId: req.jwt.userId
     }).then((result) => {
+
+        console.log('req.body.exercises', req.body.exercises)
+        console.log('req.body', req.body)
 
         req.body.exercises.forEach(oneExercise => {
             customScheduleExercises.create({

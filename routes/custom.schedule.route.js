@@ -9,7 +9,7 @@ exports.routesConfig = function (app) {
     ]);
     app.post('/custom/exercise', [
         AuthMiddleware.validJWTNeeded,
-        CustomExerciseController.create
+        CustomExerciseController.insert
     ]);
 
 

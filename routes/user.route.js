@@ -29,5 +29,10 @@ exports.routesConfig = function (app) {
         AuthController.getUserInfo
     ]);
 
+    app.get('/user/goals', [
+        AuthMiddleware.validJWTNeeded,
+        UsersController.getPersonalGoals
+    ]);
+
 
 };

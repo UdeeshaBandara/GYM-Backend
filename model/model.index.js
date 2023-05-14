@@ -19,6 +19,7 @@ db.category = require("./category.model.js")(sequelize, Sequelize, DataTypes);
 db.exerciseCategory = require("./exercise.category.model.js")(sequelize, Sequelize, DataTypes);
 db.customSchedules = require("./custom.schedules.model.js")(sequelize, Sequelize, DataTypes);
 db.customScheduleExercises = require("./custom.schedule.exercise.model.js")(sequelize, Sequelize, DataTypes);
+db.personalGoals = require("./personal.goals.model.js")(sequelize, Sequelize, DataTypes);
 
 //Table relationships
 db.exercise.belongsToMany(db.category, {through: db.exerciseCategory});
