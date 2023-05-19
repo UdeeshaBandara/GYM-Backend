@@ -33,6 +33,10 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validJWTNeeded,
         UsersController.getPersonalGoals
     ]);
+    app.post('/user/goals', [
+        AuthMiddleware.validJWTNeeded,
+        UsersController.changeUserGoal
+    ]);
 
 
 };
