@@ -72,6 +72,18 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
 
+        },
+        personalGoalsId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+
+        },
+        isOnboardingCompleted: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+
         }
     });
 

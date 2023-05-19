@@ -20,7 +20,24 @@ exports.login = (req, res) => {
         let b = Buffer.from(hash);
         let refresh_token = b.toString('base64');
 
-        res.status(200).send({status: true, accessToken: token, refreshToken: refresh_token});
+        user.findAll({
+            where: {
+                id: req.body.userId
+            }
+        }).then((result) => {
+
+            if (!result[0]) {
+                res.status(200).send({status: false, data: 'Invalid user'});
+            } else {
+
+                res.status(200).send({status: true, accessToken: token, refreshToken: refresh_token, isOnboardingCompleted: result[0].dataValues.isOnboardingCompleted});
+            }
+        }).catch(err => {
+
+            res.status(200).send({status: false, data: "Failed to login with credentials"});
+
+
+        });
 
 
     } catch (err) {
@@ -33,6 +50,7 @@ exports.updateUserProfile = (req, res) => {
 
         req.body.personalGoalsId = req.body.goalId;
         delete req.body.goalId;
+        req.body.isOnboardingCompleted = 1;
         user.update(req.body, {
             where: {
                 email: req.jwt.email
