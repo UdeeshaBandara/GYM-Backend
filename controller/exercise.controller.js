@@ -39,14 +39,9 @@ exports.getExerciseByCategory = async (req, res) => {
         },
 
     }).catch(err => {
-
-
         return res.status(200).send({status: false, data: "Failed to retrieve exercises"});
-
-
     });
-    let reps = 0;
-    let sets = 0;
+
     let userData = await user.findAll({
         where: {
             id: req.jwt.userId
