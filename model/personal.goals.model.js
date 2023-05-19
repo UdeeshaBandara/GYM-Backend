@@ -17,6 +17,20 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             defaultValue: "",
             unique: false,
 
+        },
+        setCount: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "",
+            unique: false,
+
+        },
+        repCount: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "",
+            unique: false,
+
         }
     });
 
