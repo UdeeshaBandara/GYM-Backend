@@ -45,3 +45,28 @@ exports.insert = async (req, res) => {
     });
 
 };
+exports.delete = async (req, res) => {
+
+    customSchedules.destroy({
+        where: { id: req.params.id },
+    })
+        .then(numDeleted => {
+            if (numDeleted > 0) {
+                customScheduleExercises.destroy({
+                    where: { customScheduleId: req.params.id }
+                })
+                    .then(numDeleted => {
+                        return res.status(200).send({status: true, data: "Deleted successfully"});
+                    })
+                    .catch(error => {
+                        return res.status(200).send({status: false, data: "Invalid custom schedule"});
+                    });
+
+            } else {
+                return res.status(200).send({status: false, data: "Invalid custom schedule"});
+            }
+        })
+        .catch(error => {
+            return res.status(200).send({status: false, data: "Failed to delete custom schedule"});
+        });
+};

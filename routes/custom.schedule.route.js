@@ -11,6 +11,10 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validJWTNeeded,
         CustomExerciseController.insert
     ]);
+    app.delete('/custom/exercise/:id', [
+        AuthMiddleware.validJWTNeeded,
+        CustomExerciseController.delete
+    ]);
 
 
 
