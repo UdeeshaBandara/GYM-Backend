@@ -77,9 +77,9 @@ exports.updateUserProfile = (req, res) => {
 exports.getUserInfo = (req, res) => {
     if (req.body) {
 
-        user.findAll(req.body, {
+        user.findAll( {
             where: {
-                email: req.jwt.email
+                id: req.jwt.userId
             }
         }).then((result) => {
 
