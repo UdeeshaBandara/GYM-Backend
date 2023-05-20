@@ -6,6 +6,9 @@ exports.getAllCustomExercises = async (req, res) => {
         include: {
             model: exercise
         },
+        where: {
+            userId: req.jwt.userId
+        }
 
     }).catch(err => {
         console.log('err', err)
